@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Gemini API Call Helper ---
   async function callGeminiAPI(prompt) {
-    const apiKey = ""; // Canvas will automatically provide the API key at runtime
+    const apiKey = "AIzaSyDy6GljVqk1XQKZQOz-ONlzIYNYxpUhYUU";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     let chatHistory = [];
