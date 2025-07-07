@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const createLifeButton = document.getElementById("createLifeButton");
+  // Removed: createLifeButton as it's being removed from HTML
   const lifeDisplay = document.getElementById("lifeDisplay");
   const loadingSpinner = document.getElementById("loadingSpinner");
 
+  // Elements for custom prompt
+  const userPromptInput = document.getElementById("userPrompt");
+  const customLifeButton = document.getElementById("customLifeButton");
+
   // --- Gemini API Call Helper ---
   async function callGeminiAPI(prompt) {
-    const apiKey = "AIzaSyDy6GljVqk1XQKZQOz-ONlzIYNYxpUhYUU";
+    // IMPORTANT: If running outside of the Canvas environment (e.g., from GitHub),
+    // you MUST replace the empty string below with your actual Gemini API Key.
+    // Get your API key from Google AI Studio: https://aistudio.google.com/app/apikey
+    const apiKey = "AIzaSyDy6GljVqk1XQKZQOz-ONlzIYNYxpUhYUU"; // <-- PASTE YOUR ACTUAL GEMINI API KEY HERE IF NOT IN CANVAS!
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     let chatHistory = [];
@@ -23,7 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Gemini API error:", errorData);
-        throw new Error(`API error: ${response.status} ${response.statusText}`);
+        // Provide more specific error message from API if available
+        const errorMessage = errorData.error && errorData.error.message ? errorData.error.message : `${response.status} ${response.statusText}`;
+        throw new Error(`API error: ${errorMessage}`);
       }
 
       const result = await response.json();
@@ -33,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return result.candidates[0].content.parts[0].text;
       } else {
         console.warn("Gemini API response structure unexpected:", result);
-        return "Could not generate content.";
+        return "Could not generate content. (Unexpected API response)";
       }
     } catch (error) {
       console.error("Error calling Gemini API:", error);
@@ -41,15 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Function to create life using Gemini API ---
-  async function createLife() {
+  // --- Function to create life using a custom user prompt ---
+  async function createCustomLife() {
+    const userIdea = userPromptInput.value.trim();
+    if (!userIdea) {
+      lifeDisplay.textContent = "Please enter your life idea!";
+      lifeDisplay.style.color = "orange";
+      return;
+    }
+
     // Disable button and show spinner
-    createLifeButton.disabled = true;
-    createLifeButton.textContent = "Generating...";
+    customLifeButton.disabled = true;
+    customLifeButton.textContent = "Generating...";
     loadingSpinner.classList.remove("hidden");
     lifeDisplay.textContent = ""; // Clear previous content
 
-    const prompt = "Describe a unique, fictional life form in a few sentences (max 50 words). Include its name, appearance, and one interesting ability or characteristic. Make it sound whimsical or fantastical.";
+    const prompt = `Describe a unique, fictional life form based on this idea: "${userIdea}". Keep it to a few sentences (max 50 words). Include its name, appearance, and one interesting ability or characteristic. Make it sound whimsical or fantastical.`;
 
     const generatedLife = await callGeminiAPI(prompt);
 
@@ -63,13 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Re-enable button and hide spinner
-    createLifeButton.disabled = false;
-    createLifeButton.innerHTML = '✨ Create Life'; // Reset button text with sparkle
+    customLifeButton.disabled = false;
+    customLifeButton.innerHTML = '✨ Generate from My Idea'; // Reset button text with sparkle
     loadingSpinner.classList.add("hidden");
   }
 
   // --- Event Listener ---
-  if (createLifeButton) {
-    createLifeButton.addEventListener("click", createLife);
+  // Removed: createLifeButton event listener
+  if (customLifeButton) {
+    customLifeButton.addEventListener("click", createCustomLife);
   }
 });
