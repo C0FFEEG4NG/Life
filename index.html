@@ -81,12 +81,18 @@
   </header>
 
   <button id="createLifeButton" class="btn">
-    ✨ Create Life
+    <p style="font-size:18px;color:orange;text-shadow:1px 1px 1px #000;">Create Life</p>
   </button>
+
+  <section>
+  <label for="userPrompt">Enter your own life idea...</label><br>
+  <input type="text" id="userPrompt" placeholder="Make life..." />
+  <button id="customLifeButton" class="btn">✨ Generate from My Idea</button>
+</section>
 
   <div id="loadingSpinner" class="spinner hidden"></div>
   <div id="lifeDisplay" class="life-display">
-    Click "✨ Create Life" to generate a new life form!
+    Click "✨ Create Life" to generate a new life!
   </div>
   
   <script src="life_simulator.js" defer></script>
