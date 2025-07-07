@@ -57,12 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Disable button and show spinner
     customLifeButton.disabled = true;
-    customLifeButton.textContent = "Generating...";
+    customLifeButton.textContent = "Generating... (this may take long)";
     loadingSpinner.classList.remove("hidden");
     lifeDisplay.textContent = ""; // Clear previous content
 
     // Updated prompt: removed "whimsical or fantastical" and added default for normal humans
-    const prompt = `Describe a unique, fictional life form based on this idea: "${userIdea}". Keep it to a detailed description. Count up from zero up until 100 years old, unless there is a specified age they want the character to die (if the character is immortal, end the story with "and there are still adventures to see." If not specified, describe a normal human life. Otherwise, follow the specific instructions.`;
+    const prompt = `Describe a unique, fictional life form based on this idea: "${userIdea}". Keep it to a detailed description. Count up from zero up until 100 years old, unless there is a specified age they want the character to die (if the character is immortal, end the story with "and there are still adventures to see." If not specified, describe a normal human life in a human world with no other beings except things in the normal world. Otherwise, follow the specific instructions.`;
 
     const generatedLife = await callGeminiAPI(prompt);
 
