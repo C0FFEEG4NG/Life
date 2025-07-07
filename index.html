@@ -70,6 +70,31 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    /* Styles for the new section */
+    section {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+    section label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    }
+    section input[type="text"] {
+      width: calc(100% - 20px); /* Adjust for padding */
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #555;
+      background-color: #333;
+      color: #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    section input[type="text"]::placeholder {
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -81,16 +106,17 @@
   </header>
 
   <section>
-  <label for="userPrompt">Enter your own life idea...</label><br>
-  <input type="text" id="userPrompt" placeholder="Make life..." />
-  <button id="customLifeButton" class="btn">✨ Generate from My Idea</button>
-</section>
+    <label for="userPrompt">Enter your own life idea...</label><br>
+    <input type="text" id="userPrompt" placeholder="Make life..." />
+    <button id="customLifeButton" class="btn">✨ Generate from My Idea</button>
+  </section>
 
   <div id="loadingSpinner" class="spinner hidden"></div>
   <div id="lifeDisplay" class="life-display">
-    Click "✨ Create Life" to generate a new life!
+    Enter an idea and click "✨ Generate from My Idea" to create a new life form!
   </div>
   
+  <!-- IMPORTANT: Ensure this script tag is correct and the file exists in the same directory -->
   <script src="life_simulator.js" defer></script>
 </body>
 </html>
