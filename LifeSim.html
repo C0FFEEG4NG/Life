@@ -1,10 +1,76 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Life Simulator</title>
-  <link rel="stylesheet" href="style.css" />
+  <!-- Link to your external CSS file -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Specific styles for this page's layout and unique elements */
+    body {
+      /* Overriding some body styles from your style.css for specific layout */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px; /* Keep padding from your CSS */
+    }
+    header {
+      margin-bottom: 30px; /* Keep margin from your CSS */
+    }
+    h1 {
+      font-size: 3rem; /* Large title */
+      font-weight: bold;
+      /* Color will come from your body CSS or you can add specific h1 style in style.css */
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.5rem;
+      /* Color will come from your body CSS */
+      margin-bottom: 5px;
+    }
+    h5 {
+      font-size: 1rem;
+      /* Color will come from your body CSS */
+    }
+    /* Styles for the life display box */
+    .life-display {
+      background-color: #282828; /* Darker background for the display box */
+      color: #e0e0e0; /* Light text for the display box */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Darker shadow */
+      margin-top: 40px;
+      max-width: 600px;
+      width: 100%;
+      min-height: 100px; /* Ensure some height even when empty */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: left; /* Align text left within the display box */
+      border: 1px solid #3a3a3a; /* Subtle border */
+    }
+    /* Styles for the loading spinner */
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.2); /* Lighter border for dark background */
+      border-left-color: #d3d3d3; /* Spinner color matching button */
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
 
@@ -14,7 +80,15 @@
     <h5>Using Google Gemini</h5>
   </header>
 
-  <button>Create Life</button>
+  <button id="createLifeButton" class="btn">
+    ✨ Create Life
+  </button>
+
+  <div id="loadingSpinner" class="spinner hidden"></div>
+  <div id="lifeDisplay" class="life-display">
+    Click "✨ Create Life" to generate a new life form!
+  </div>
   
+  <script src="life_simulator.js" defer></script>
 </body>
 </html>
